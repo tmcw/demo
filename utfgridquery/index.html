@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>utfgridquery</title>
+    <script src='lib/util.js'></script>
+    <script src='lib/reqwest.min.js'></script>
+    <script src='lib/gridinstance.js'></script>
+    <script src='lib/gridmanager.js'></script>
+    <script src='lib/sphericalmercator.js'></script>
+    <script src='lib/formatter.js'></script>
+    <script src='states.json'></script>
+    <script src='lib/request.js'></script>
+    <script src='lib/tilejson.js'></script>
+    <script src='utfgridquery.js'></script>
+    <style>
+      body {
+        background:#f0f7f7;
+        font: 13px/20px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      }
+
+      span.note {
+        display:block;
+        font-size:10px;
+      }
+
+      #result {
+        background-color:#fff;
+        -webkit-border-radius:3px;
+        -moz-border-radius:3px;
+        border-radius:3px;
+        display:inline;
+        padding:5px;
+      }
+
+      span.working {
+        transition-property:opacity;
+        opacity:0.5;
+      }
+
+      span.doingit {
+        opacity:1;
+      }
+
+      span.state, span.district {
+        font-weight:bold;
+      }
+
+      button {
+        padding:5px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id='find'>Find My Congressional District</button>
+    <div id='result'>
+
+    </div>
+    <span class='note'>(click yes if this triggers a toolbar asking for you
+      to share your location. it isn't shared or stored.)
+    </span>
+    <script>
+      window.onload = function() {
+        var f = document.getElementById('find');
+        var r = document.getElementById('result');
+        f.onclick = function() {
+          result.innerHTML = '<span class="working">working...</span>';
+          result.className = 'doingit';
+          navigator.geolocation.getCurrentPosition(function(l) {
+            utfgridquery('http://a.tiles.mapbox.com/tmcw/1.0.0/congressional_districts_adb7d8/layer.json', {
+              lat: l.coords.latitude,
+              lon: l.coords.longitude
+              }, function(f) {
+                result.innerHTML = '<span class="state">' +
+                  states[f.STATE] + '</span>, ' +
+                  'District <span class="district">' +
+                  f.NAME + '</span>';
+              });
+          });
+        }
+      };
+    </script>
+  </body>
+</html>
