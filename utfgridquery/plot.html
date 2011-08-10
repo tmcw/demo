@@ -27,7 +27,7 @@
       }
 $(function () {
     var d1 = [];
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 21; i++) {
         d1.push([i, tileRes(i)]);
     }
     var plot = $.plot($("#placeholder"), [{
@@ -38,10 +38,14 @@ $(function () {
       series: {
         lines: { show:true },
         points: { show:true }
-        },
+      },
+      points: {
+        radius:4
+      },
       grid: {
         color:'#a1867d',
         clickable:true,
+        hoverable:true,
         borderWidth: 0
       },
       yaxis: {
