@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="plot/excanvas.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="plot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="plot/jquery.flot.js"></script>
+    <style>
+      #placeholder {
+        width:620px;
+        height:200px;
+      }
+      #explanation {
+        font: 13px/20px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+        text-align:center;
+        color:#ca3988;
+        margin:10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='placeholder'></div>
+    <div id='explanation'></div>
+    <script type="text/javascript">
+
+      function tileRes(z) {
+        // return 0.25 * ((256 * Math.pow(2, z - 1)) / (Math.PI * 6378137));
+        return ((Math.PI * 6378137) / (256 * Math.pow(2, z - 1))) * 4;
+      }
+$(function () {
+    var d1 = [];
+    for (var i = 0; i < 20; i++) {
+        d1.push([i, tileRes(i)]);
+    }
+    var plot = $.plot($("#placeholder"), [{
+      color:'#d43a90',
+      shadowSize:0,
+      data: d1
+    }], {
+      series: {
+        lines: { show:true },
+        points: { show:true }
+        },
+      grid: {
+        color:'#a1867d',
+        clickable:true,
+        borderWidth: 0
+      },
+      yaxis: {
+        tickFormatter: function(x) {  return (!(x % 1)) ? Math.round(x) : ''; }
+      },
+      xaxis: {
+        ticks: 10,
+        tickFormatter: function(x) {  return (!(x % 1)) ? 'z' + Math.round(x) : ''; }
+      }
+    });
+    $("#placeholder").bind("plotclick", function (event, pos, item) {
+      if (item) {
+        var pt = d1[item.dataIndex];
+        $("#explanation").text("at zoom level " + pt[0] + ', there are ' + pt[1].toFixed(3) + ' meters in a pixel.');
+        plot.unhighlight();
+        plot.highlight(item.series, item.datapoint);
+      }
+    });
+});
+</script>
+  </body>
+</html>
