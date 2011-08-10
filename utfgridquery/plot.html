@@ -8,8 +8,10 @@
         width:600px;
         height:200px;
       }
-      #explanation {
+      body {
         font: 13px/20px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      }
+      #explanation {
         text-align:center;
         color:#ca3988;
         margin:10px;
@@ -49,7 +51,7 @@ $(function () {
         borderWidth: 0
       },
       yaxis: {
-        tickFormatter: function(x) {  return (!(x % 1)) ? Math.round(x) : ''; }
+        tickFormatter: function(x) {  return (!(x % 1)) ? Math.round(x / 1000) + 'km' : ''; }
       },
       xaxis: {
         ticks: 10,
