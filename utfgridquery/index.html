@@ -47,34 +47,83 @@
       button {
         padding:5px;
       }
+
+      #geolocation-note {
+        background-color:#fbc5ad;
+        margin-bottom:3px;
+        padding:3px;
+        text-align:center;
+      }
     </style>
   </head>
   <body>
+    <div id='geolocation-note'></div>
+    <label for='find-text'>address / city, state</label>
+    <input size='50' id='find-text' type='text' />
     <button id='find'>Find My Congressional District</button>
-    <div id='result'>
-
-    </div>
+    <div id='result'></div>
     <span class='note'>(click yes if this triggers a toolbar asking for you
       to share your location. it isn't shared or stored.)
     </span>
     <script>
+      var mqapi = 'http://open.mapquestapi.com/nominatim/v1/search?format=json&json_callback=callback&countrycodes=us&limit=1&q=';
+      var layerjson = 'http://a.tiles.mapbox.com/tmcw/1.0.0/congressional_districts_adb7d8/layer.json'
+
       window.onload = function() {
-        var f = document.getElementById('find');
-        var r = document.getElementById('result');
+        var f = document.getElementById('find'),
+            i = document.getElementById('find-text'),
+            r = document.getElementById('result');
+
+        function gridQuery(l) {
+          utfgridquery(layerjson, {
+            lat: l.lat,
+            lon: l.lon
+            }, function(f) {
+              r.innerHTML = '<span class="state">' +
+                states[f.STATE] + '</span>, ' +
+                'District <span class="district">' +
+                f.NAME + '</span>';
+            });
+        }
+
+        function geocode(v, callback) {
+          reqwest({
+              url: mqapi + v,
+              type: 'jsonp',
+              jsonpCallback: 'callback',
+              success: function(res) {
+                callback({ lat: res[0].lat, lon: res[0].lon })
+              },
+              error: callback
+          });
+        }
+
+        function fillHint() {
+          if (navigator.geolocation) {
+            document.getElementById('geolocation-note').innerHTML =
+              'Your shiny new browser can find you automatically, so the address field is optional.';
+          } else {
+            document.getElementById('geolocation-note').innerHTML = '';
+          }
+        }
+        fillHint();
         f.onclick = function() {
+          fillHint();
           r.innerHTML = '<span class="working">working...</span>';
           r.className = 'doingit';
-          navigator.geolocation.getCurrentPosition(function(l) {
-            utfgridquery('http://a.tiles.mapbox.com/tmcw/1.0.0/congressional_districts_adb7d8/layer.json', {
-              lat: l.coords.latitude,
-              lon: l.coords.longitude
-              }, function(f) {
-                r.innerHTML = '<span class="state">' +
-                  states[f.STATE] + '</span>, ' +
-                  'District <span class="district">' +
-                  f.NAME + '</span>';
+          if (i.value) {
+            geocode(i.value, gridQuery);
+          } else if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(res) {
+              gridQuery({
+                lat: res.coords.latitude,
+                lon: res.coords.longitude
               });
-          });
+            });
+          } else {
+            document.getElementById('geolocation-note').innerHTML =
+              'A location is required!';
+          }
         }
       };
     </script>
