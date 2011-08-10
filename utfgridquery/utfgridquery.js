@@ -16,7 +16,7 @@
 
         wax.request.get(gurl, function(err, t) {
             var g = wax.GridInstance(t);
-            var f = g.getFeatureAtOffset(
+            var f = g.gridFeature(
                 (xy[0] / 256) % 256,
                 (xy[1] / 256) % 256);
             callback(f);

@@ -21,31 +21,25 @@ wax.GridInstance = function(grid_tile, formatter, options) {
         return key;
     }
 
-    instance.getFeatureAtOffset = function(x, y) {
+    // Lower-level than tileFeature - has nothing to do
+    // with the DOM. Takes a px offset from 0, 0 of a grid.
+    instance.gridFeature = function(x, y) {
         if (!(grid_tile && grid_tile.grid)) return;
-
-        var res = resolution;
-
-        // This tile's resolution. larger tiles will have lower,
-        // aka coarser, resolutions
         if ((y < 0) || (x < 0)) return;
         if ((Math.floor(y) > tileSize) ||
             (Math.floor(x) > tileSize)) return;
         // Find the key in the grid. The above calls should ensure that
         // the grid's array is large enough to make this work.
-        var key = grid_tile.grid[
-           Math.floor((y) / res)
+        var key = resolveCode(grid_tile.grid[
+           Math.floor((y) / resolution)
         ].charCodeAt(
-           Math.floor((x) / res)
-        );
-
-        key = resolveCode(key);
+           Math.floor((x) / resolution)
+        ));
 
         if (grid_tile.keys[key] && grid_tile.data[grid_tile.keys[key]]) {
             return grid_tile.data[grid_tile.keys[key]];
         }
     };
-
 
     // Get a feature:
     //
@@ -53,34 +47,12 @@ wax.GridInstance = function(grid_tile, formatter, options) {
     // * `tile_element`: a DOM element of a tile, from which we can get an offset.
     // * `options` options to give to the formatter: minimally having a `format`
     //   member, being `full`, `teaser`, or something else.
-    instance.getFeature = function(x, y, tile_element, options) {
-        if (!(grid_tile && grid_tile.grid)) return;
-
+    instance.tileFeature = function(x, y, tile_element, options) {
         // IE problem here - though recoverable, for whatever reason
-        var offset = wax.util.offset(tile_element),
-            tileX = offset.left,
-            tileY = offset.top,
-            res = (offset.width / tileSize) * resolution;
+        var offset = wax.util.offset(tile_element);
+            feature = this.gridFeature(x - offset.left, y - offset.top);
 
-        // This tile's resolution. larger tiles will have lower, aka coarser, resolutions
-        if ((y - tileY < 0) || (x - tileX < 0)) return;
-        if ((Math.floor(y - tileY) > tileSize) ||
-            (Math.floor(x - tileX) > tileSize)) return;
-        // Find the key in the grid. The above calls should ensure that
-        // the grid's array is large enough to make this work.
-        var key = grid_tile.grid[
-           Math.floor((y - tileY) / res)
-        ].charCodeAt(
-           Math.floor((x - tileX) / res)
-        );
-
-        key = resolveCode(key);
-
-        // If this layers formatter hasn't been loaded yet,
-        // download and load it now.
-        if (grid_tile.keys[key] && grid_tile.data[grid_tile.keys[key]]) {
-            return formatter.format(options, grid_tile.data[grid_tile.keys[key]]);
-        }
+        if (feature) return formatter.format(options, feature);
     };
 
     return instance;
