@@ -1,8 +1,10 @@
 (function(context) {
     var s = new SphericalMercator();
+    var savedD = false;
 
     function utfgridquery(tilejson, point, callback) {
-      wax.tilejson(tilejson, function(d) {
+      function getTile(d) {
+        savedD = d;
         var xy = s.px([
           point.lon, point.lat], d.maxzoom, true);
 
@@ -21,8 +23,12 @@
                 (xy[1] / 256) % 256);
             callback(f);
         });
-
-      });
+      }
+      if (!savedD) {
+          wax.tilejson(tilejson, getTile);
+      } else {
+          getTile(savedD);
+      }
     }
     context.utfgridquery = utfgridquery;
 })(this);

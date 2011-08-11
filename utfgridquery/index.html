@@ -76,10 +76,14 @@
             lat: l.lat,
             lon: l.lon
             }, function(f) {
-              r.innerHTML = '<span class="state">' +
-                states[f.STATE] + '</span>, ' +
-                'District <span class="district">' +
-                f.NAME + '</span>';
+              if (f.STATE && f.NAME) {
+                  r.innerHTML = '<span class="state">' +
+                    states[f.STATE] + '</span>, ' +
+                    'District <span class="district">' +
+                    f.NAME + '</span>';
+              } else {
+                r.innerHTML = 'an error occurred. let me know!';
+              }
             });
         }
 
