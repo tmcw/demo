@@ -1,3 +1,10 @@
+function resolveCode(key) {
+    if (key >= 93) key--;
+    if (key >= 35) key--;
+    key -= 32;
+    return key;
+}
+
 var MM = com.modestmaps;
 $(function() {
     wax.tilejson(
@@ -11,16 +18,16 @@ $(function() {
             $('<img src="' + x + '" />')
                 .addClass('request-image')
                 .prependTo('#downloaded-tiles');
-            if ($('#downloaded-tiles img').length > 5) {
+            if ($('#downloaded-tiles img').length > 4) {
                 $('#downloaded-tiles img:last').remove();
             }
         });
 
         instrumentHub.addCallback('grid', function(x, g) {
             $('<a href="' + g.url + '"></a>')
-                .text(g.url)
+                .text(g.url.replace('http://', ''))
                 .prependTo('#downloaded-grids');
-            if ($('#downloaded-grids a').length > 2) {
+            if ($('#downloaded-grids a').length > 1) {
                 $('#downloaded-grids a:last').remove();
             }
         });
@@ -38,6 +45,7 @@ $(function() {
         instrumentHub.addCallback('key', function(x, g) {
             $('#key').text(g);
             $('#key-charcode').text(g.charCodeAt(0));
+            $('#key-resolvedcode').text(resolveCode(g.charCodeAt(0)));
         });
 
         instrumentHub.addCallback('feature', function(x, g) {
@@ -45,7 +53,7 @@ $(function() {
         });
 
         instrumentHub.addCallback('featureHTML', function(x, g) {
-            $('#feature-html').text(g);
+            $('#feature-html').html(g);
         });
     });
 });

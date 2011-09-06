@@ -22,8 +22,7 @@
       spec</a> and UTFGrid really work? Play with the map below and learn.</p>
       <div id='map'></div>
     </div>
-    <div class='right'>
-      <div class='inner'>
+    <div class='right content'>
       <h3>1. Downloading Tiles</h3>
       <p>When the map loads initially, all you get are images</p>
       <p><a href='https://github.com/stamen/modestmaps-js'>Modest Maps</a> does
@@ -47,15 +46,17 @@
       <ul>
         <li>Key is <span id='key' class='highlight'></span></li>
         <li>Which, in character codes, is the number <span id='key-charcode' class='highlight'></span></li>
+        <li>Which resolves to the index <span id='key-resolvedcode' class='highlight'></span></li>
       </ul>
       <p>That'll be enough to pluck out some data from the grid.</p>
+    </div>
+    <div class='right-2 content'>
       <h3>5. Formatting Data</h3>
       <p>So we have data from that key:</p>
       <pre class='codebox' id='feature-json'></pre>
       <p>But that doesn't look cool. So, it gets run through a formatter function.
       In this case, that function looks like:</p>
-<pre class='codebox'><code>
-function (options, data) {
+<pre class='codebox'><code>function (options, data) {
     switch (options.format) {
     case 'full':
         return '';
@@ -68,11 +69,9 @@ function (options, data) {
         return '&lt;img src=\"data:image/png;base64,' + data.flagpng + '\" style=\"box-shadow:0px 1px 5px #333;-moz-box-shadow:0px 1px 5px #333;-webkit-box-shadow:0px 1px 5px #333;\" /&gt;&lt;br /&gt; &lt;strong&gt;' + data.ADMIN + '&lt;/strong&gt;';
         break;
     }
-}
-</code></pre>
+}</code></pre>
     <p>Which finally yields the beautiful HTML:</p>
-    <pre class='codebox'><code id='feature-html'></code></pre>
-    </div>
+    <div id='feature-html'></div>
     </div>
   </div>
 <script type="text/javascript">

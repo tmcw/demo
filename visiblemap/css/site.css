@@ -2,7 +2,7 @@ body, button {
   font:13px/20px "Georgia", "Times New Roman", serif;
 }
 body {
-  background:#fff;
+  background:url('background.png') #fff;
   color:#222;
   }
 a { color: #8c0f26; }
@@ -44,14 +44,23 @@ p {
 div.left {
   width:400px;
   position:absolute;
-  top:20px;
-  left:50px;
+  top:10px;
+  left:20px;
 }
 div.right {
-  width:400px;
+  width:300px;
   position:absolute;
-  right:400px;
-  top:40px;
+  left:430px;
+  top:30px;
+  bottom:0;
+  overflow:auto;
+}
+
+div.right-2 {
+  width:300px;
+  position:absolute;
+  left:730px;
+  top:30px;
   bottom:0;
   overflow:auto;
 }
@@ -59,18 +68,19 @@ div.right {
 div.right div.inner {
   height:1000px;
 }
+
 h3 {
-  margin:0 10px 10px 10px;
+  margin:10px 10px 10px 10px;
   border-bottom:1px solid #ccc;
   font-size:16px;
-  line-height:20px;
+  line-height:19px;
 }
 
-div.right p, div.right ul {
-  padding:0 10px 5px 10px;
+div.content p, div.content ul {
+  padding:0 10px 0 10px;
 }
 
-div.right ul {
+div.content ul {
   margin-left:20px;
 }
 
@@ -87,6 +97,10 @@ span.highlight {
   padding:0 10px;
 }
 
+#downloaded-tiles {
+  height:60px;
+}
+
 #downloaded-grids {
   overflow:auto;
   padding-bottom:10px;
@@ -98,10 +112,9 @@ span.highlight {
 }
 
 img.request-image {
-  width:64px;
-  height:64px;
-  margin:2px;
-  border:1px solid #333;
+  width:58px;
+  height:58px;
+  margin:1px;
 }
 
 #map:hover .map-tile-loaded {
@@ -133,11 +146,35 @@ em {
 }
 
 .codebox {
-  padding:0 10px;
+  padding:0 5px;
   margin:0 10px;
-  overflow:auto;
-  height:250px;
+  overflow:scroll;
+  height:150px;
   font:10px/15px "Monaco", monospace;
   background-color:#eee;
   color:#8c0f26;
 }
+
+#feature-html {
+  text-align:center;
+}
+
+/* Special sauce */
+pre::-webkit-scrollbar {
+  height:8px;
+  width:8px;
+  background:#f8f8f8;
+  border-radius:4px;
+  }
+
+pre::-webkit-scrollbar-thumb:hover {
+  background:#555;
+}
+
+pre::-webkit-scrollbar-thumb {
+  border-radius:4px;
+  background:#ccc;
+  }
+
+pre::-webkit-scrollbar-thumb:vertical { height:25px; }
+pre::-webkit-scrollbar-thumb:horizontal { width:25px; }
