@@ -24,7 +24,6 @@
     </div>
     <div class='right content'>
       <h3>1. Downloading Tiles</h3>
-      <p>When the map loads initially, all you get are images</p>
       <p><a href='https://github.com/stamen/modestmaps-js'>Modest Maps</a> does
       the work of requesting lots of tile images from
       <a href='http://mapbox.com/#/tilestream'>TileStream</a>.</p>
@@ -38,9 +37,15 @@
       <p>Finding pixels isn't too tough - Wax just finds the top-left corner
       of the the tile and then the mouse coordinates.</p>
       <ul>
-        <li>Tile at <span id='tile-offset'></span></li>
-        <li>Mouse at <span id='mouse-offset'></span></li>
+        <li>tile: <span id='tile-offset'></span>, mouse: <span id='mouse-offset'></span></li>
       </ul>
+      <div id='tile-demonstration'>
+      <div class='target'>&nbsp;</div>
+      <div class='grid-pattern'>&nbsp;</div>
+      <img src='' />
+      </div>
+    </div>
+    <div class='right-2 content'>
       <h3>4. Decoding Keys</h3>
       <p>Decoding keys takes some simple math.</p>
       <ul>
@@ -49,8 +54,6 @@
         <li>Which resolves to the index <span id='key-resolvedcode' class='highlight'></span></li>
       </ul>
       <p>That'll be enough to pluck out some data from the grid.</p>
-    </div>
-    <div class='right-2 content'>
       <h3>5. Formatting Data</h3>
       <p>So we have data from that key:</p>
       <pre class='codebox' id='feature-json'></pre>

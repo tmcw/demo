@@ -1,5 +1,5 @@
 var instrumentHub = new com.modestmaps.CallbackManager(null,
-    ['grid', 'offset', 'mouseOffset', 'key', 'feature', 'featureHTML']);
+    ['grid', 'offset', 'key', 'feature', 'featureHTML']);
 
 var gridUrl = function(url) {
     return url.replace(/(\.png|\.jpg|\.jpeg)(\d*)/, '.grid.json');
@@ -32,8 +32,11 @@ wax.GridInstance = _.wrap(wax.GridInstance,
             function(g, x, y, tile_element, options) {
                 var f = g.apply(gi, [x, y, tile_element, options]);
                 var offset = wax.util.offset(tile_element);
-                instrumentHub.dispatchCallback('offset', offset);
-                instrumentHub.dispatchCallback('mouseOffset', [x, y]);
+                instrumentHub.dispatchCallback('offset', {
+                    offset: offset,
+                    mouseOffset: [x, y],
+                    tile_element: tile_element
+                });
 
                 var gt = gi.grid_tile();
                 var resolution = 4;

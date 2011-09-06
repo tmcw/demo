@@ -34,12 +34,14 @@ $(function() {
 
         instrumentHub.addCallback('offset', function(x, g) {
             $('#tile-offset').text(
-                g.left + ' x ' + g.top);
-        });
-
-        instrumentHub.addCallback('mouseOffset', function(x, g) {
+                g.offset.left + ' x ' + g.offset.top);
             $('#mouse-offset').text(
-                g[0] + ' x ' + g[1]);
+                g.mouseOffset[0] + ' x ' + g.mouseOffset[1]);
+            $('#tile-demonstration img').attr('src', $(g.tile_element).attr('src'));
+            $('#tile-demonstration div.target').css('left',
+                (Math.floor((g.mouseOffset[0] - g.offset.left) / 4) * 4)- 4);
+            $('#tile-demonstration div.target').css('top',
+                (Math.floor((g.mouseOffset[1] - g.offset.top) / 4) * 4)+ 4);
         });
 
         instrumentHub.addCallback('key', function(x, g) {

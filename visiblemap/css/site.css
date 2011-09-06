@@ -51,7 +51,7 @@ div.right {
   width:300px;
   position:absolute;
   left:430px;
-  top:30px;
+  top:10px;
   bottom:0;
   overflow:auto;
 }
@@ -60,7 +60,7 @@ div.right-2 {
   width:300px;
   position:absolute;
   left:730px;
-  top:30px;
+  top:10px;
   bottom:0;
   overflow:auto;
 }
@@ -117,6 +117,7 @@ img.request-image {
   margin:1px;
 }
 
+/*
 #map:hover .map-tile-loaded {
   -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;
 }
@@ -124,6 +125,7 @@ img.request-image {
 #map img.map-tile-loaded:hover {
   opacity:1;
 }
+*/
 
 .wax-tooltip {
   z-index:999999;
@@ -145,11 +147,34 @@ em {
   font-style:italic;
 }
 
+#tile-demonstration {
+  margin:0 10px;
+}
+
+#tile-demonstration img {
+  width:256px;
+  height:256px;
+}
+
+#tile-demonstration .grid-pattern {
+  position:absolute;
+  width:256px;
+  height:256px;
+  background:url('grid_resolution.gif');
+}
+
+#tile-demonstration .target {
+  width:12px;
+  height:12px;
+  position:relative;
+  background:url('target.png');
+}
+
 .codebox {
   padding:0 5px;
   margin:0 10px;
   overflow:scroll;
-  height:150px;
+  height:100px;
   font:10px/15px "Monaco", monospace;
   background-color:#eee;
   color:#8c0f26;
