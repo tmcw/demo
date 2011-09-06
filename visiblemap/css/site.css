@@ -1,0 +1,143 @@
+body, button {
+  font:13px/20px "Georgia", "Times New Roman", serif;
+}
+body {
+  background:#fff;
+  color:#222;
+  }
+a { color: #8c0f26; }
+h1 {
+  width:580px;
+  line-height:40px;
+  font-size:24px;
+}
+div.container {
+  width:800px;
+}
+p {
+  padding:10px 0;
+  }
+#map {
+  background:#111;
+  width:398px;
+  height:398px;
+  border:1px solid #111;
+  float:left;
+}
+.map-tile {
+  opacity:0;
+}
+.map-tile-loaded {
+  -webkit-animation-name: 'fade-in';
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-duration: .1s;
+}
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+div.left {
+  width:400px;
+  position:absolute;
+  top:20px;
+  left:50px;
+}
+div.right {
+  width:400px;
+  position:absolute;
+  right:400px;
+  top:40px;
+  bottom:0;
+  overflow:auto;
+}
+
+div.right div.inner {
+  height:1000px;
+}
+h3 {
+  margin:0 10px 10px 10px;
+  border-bottom:1px solid #ccc;
+  font-size:16px;
+  line-height:20px;
+}
+
+div.right p, div.right ul {
+  padding:0 10px 5px 10px;
+}
+
+div.right ul {
+  margin-left:20px;
+}
+
+span.highlight {
+  padding:3px;
+  background:#FFE7C9;
+  border:1px solid #D4A973;
+  font-weight:bold;
+}
+  
+
+#downloaded-tiles,
+#downloaded-grids {
+  padding:0 10px;
+}
+
+#downloaded-grids {
+  overflow:auto;
+  padding-bottom:10px;
+}
+
+#downloaded-grids a {
+  display:block;
+  font:10px/15px "Monaco", monospace;
+}
+
+img.request-image {
+  width:64px;
+  height:64px;
+  margin:2px;
+  border:1px solid #333;
+}
+
+#map:hover .map-tile-loaded {
+  -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;
+}
+
+#map img.map-tile-loaded:hover {
+  opacity:1;
+}
+
+.wax-tooltip {
+  z-index:999999;
+  position:absolute;
+  background:#333;
+  color:#fff;
+  padding:10px;
+  left:10px;
+  top:10px;
+  max-width:300px;
+  opacity:1;
+  -webkit-transition:opacity .5s;
+  -moz-transition:opacity .5s;
+  }
+
+.wax-tooltip.hide { opacity:0; }
+
+em {
+  font-style:italic;
+}
+
+.codebox {
+  padding:0 10px;
+  margin:0 10px;
+  overflow:auto;
+  height:250px;
+  font:10px/15px "Monaco", monospace;
+  background-color:#eee;
+  color:#8c0f26;
+}

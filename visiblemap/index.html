@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>visible map</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <script src='ext/modestmaps.js' type='text/javascript'></script>
+  <script src='ext/underscore.js' type='text/javascript'></script>
+  <script src='ext/jquery.js' type='text/javascript'></script>
+  <script src='ext/json2.js' type='text/javascript'></script>
+  <script src='ext/wax.mm.js' type='text/javascript'></script>
+  <script src='ext/instrument.js' type='text/javascript'></script>
+  <script src='index.js' type='text/javascript'></script>
+  <link href='css/reset.css' type='text/css' rel='stylesheet' />
+  <link href='css/site.css' type='text/css' rel='stylesheet' />
+</head>
+<body>
+  <div class='container'>
+    <div class='left'>
+    <h1>a visible map</h1>
+      <p>How does <a href='https://github.com/mapbox/mbtiles-spec'>the mbtiles
+      spec</a> and UTFGrid really work? Play with the map below and learn.</p>
+      <div id='map'></div>
+    </div>
+    <div class='right'>
+      <div class='inner'>
+      <h3>1. Downloading Tiles</h3>
+      <p>When the map loads initially, all you get are images</p>
+      <p><a href='https://github.com/stamen/modestmaps-js'>Modest Maps</a> does
+      the work of requesting lots of tile images from
+      <a href='http://mapbox.com/#/tilestream'>TileStream</a>.</p>
+      <div id='downloaded-tiles'></div>
+      <h3>2. Downloading Grid Data</h3>
+      <p><a href='http://mapbox.github.com/wax'>Wax</a> takes care of downloading
+      files of <a href='http://json.org'>JSON</a>-formatted data from TileStream.
+      This happens <em>the first time that you hover over each tile</em>.
+      <div id='downloaded-grids'></div>
+      <h3>3. Finding Pixels</h3>
+      <p>Finding pixels isn't too tough - Wax just finds the top-left corner
+      of the the tile and then the mouse coordinates.</p>
+      <ul>
+        <li>Tile at <span id='tile-offset'></span></li>
+        <li>Mouse at <span id='mouse-offset'></span></li>
+      </ul>
+      <h3>4. Decoding Keys</h3>
+      <p>Decoding keys takes some simple math.</p>
+      <ul>
+        <li>Key is <span id='key' class='highlight'></span></li>
+        <li>Which, in character codes, is the number <span id='key-charcode' class='highlight'></span></li>
+      </ul>
+      <p>That'll be enough to pluck out some data from the grid.</p>
+      <h3>5. Formatting Data</h3>
+      <p>So we have data from that key:</p>
+      <pre class='codebox' id='feature-json'></pre>
+      <p>But that doesn't look cool. So, it gets run through a formatter function.
+      In this case, that function looks like:</p>
+<pre class='codebox'><code>
+function (options, data) {
+    switch (options.format) {
+    case 'full':
+        return '';
+        break;
+    case 'location':
+        return '';
+        break;
+    case 'teaser':
+    default:
+        return '&lt;img src=\"data:image/png;base64,' + data.flagpng + '\" style=\"box-shadow:0px 1px 5px #333;-moz-box-shadow:0px 1px 5px #333;-webkit-box-shadow:0px 1px 5px #333;\" /&gt;&lt;br /&gt; &lt;strong&gt;' + data.ADMIN + '&lt;/strong&gt;';
+        break;
+    }
+}
+</code></pre>
+    <p>Which finally yields the beautiful HTML:</p>
+    <pre class='codebox'><code id='feature-html'></code></pre>
+    </div>
+    </div>
+  </div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12158002-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4e57cacc613f5d762a000001');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+</body>
+</html>
