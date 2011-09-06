@@ -86,8 +86,8 @@ div.content ul {
 
 span.highlight {
   padding:3px;
-  background:#FFE7C9;
-  border:1px solid #D4A973;
+  background:#FFEDD8;
+  font-family:monospace;
   font-weight:bold;
 }
   
