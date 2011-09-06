@@ -41,7 +41,7 @@ $(function() {
             $('#tile-demonstration div.target').css('left',
                 (Math.floor((g.mouseOffset[0] - g.offset.left) / 4) * 4)- 4);
             $('#tile-demonstration div.target').css('top',
-                (Math.floor((g.mouseOffset[1] - g.offset.top) / 4) * 4)+ 4);
+                (Math.floor((g.mouseOffset[1] - g.offset.top) / 4) * 4) + 8);
         });
 
         instrumentHub.addCallback('key', function(x, g) {
