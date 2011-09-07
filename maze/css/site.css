@@ -11,6 +11,12 @@ header, footer {
   z-index:80;
   }
 
+input {
+  background:#212121;
+  font: 15px/30px 'Monaco', monospace;
+  color:#70ff4b;
+}
+
 header {
   height:40px;
   top:0;
