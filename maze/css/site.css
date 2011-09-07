@@ -1,0 +1,73 @@
+body {
+  color:#111;
+  font-size:14px;
+  background:#212121;
+  font: 15px/40px 'Monaco', monospace;
+}
+
+header, footer {
+  background-color:#88ff3e;
+  position:absolute;
+  z-index:80;
+  }
+
+header {
+  height:40px;
+  top:0;
+  left:0;
+  width:425px;
+}
+
+footer {
+  padding:10px;
+  bottom:0;
+  right:0;
+}
+
+
+header h1 {
+  margin:0 10px;
+}
+
+header a, footer a {
+  color:#212121;
+}
+
+#map {
+  position:absolute;
+  bottom:0;
+  right:0;
+  left:0;
+  top:0;
+  }
+
+.wax-tooltip {
+  position:absolute;
+  top:40px;
+  left:0;
+  width:405px;
+  color:#212121;
+  background:#70ff4b;
+  padding:0 10px 0 10px;
+  }
+
+.map-tile {
+  opacity:0;
+}
+
+.map-tile-loaded {
+  -webkit-animation-name: 'fade-in';
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-duration: .1s;
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
