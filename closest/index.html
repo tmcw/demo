@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <title>closest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script src='lib/util.js'></script>
+    <script src='lib/reqwest.min.js'></script>
+    <script src='lib/gridinstance.js'></script>
+    <script src='lib/sphericalmercator.js'></script>
+    <script src='lib/formatter.js'></script>
+    <script src='lib/request.js'></script>
+    <script src='lib/tilejson.js'></script>
+    <script src='utfgridquery.js'></script>
+    <style>
+      body {
+        background:#E9F7E9;
+        color:#111;
+        font:15px/20px normal 'Helvetica', sans-serif;
+        width:320px;
+        padding:0;
+        margin:0 auto;
+      }
+
+      a {
+        color:#090072;
+        text-decoration:none;
+        background:#E5E3FA;
+        padding:2px;
+      }
+
+      p {
+        margin:10px 10px;
+      }
+
+      h2 {
+        font:30px/40px normal 'Helvetica', sans-serif;
+      }
+
+      #result {
+        font:30px/40px normal 'Helvetica', sans-serif;
+        padding:4px;
+        background:#B8E0B8;
+      }
+
+      #result-bus {
+        font-weight:bold;
+      }
+
+      #result-bus span.verb {
+        font-weight:normal;
+      }
+
+      span.working {
+        transition-property:opacity;
+        opacity:0.5;
+      }
+
+      span.doingit {
+        opacity:1;
+      }
+
+      span.state, span.district {
+        font-weight:bold;
+      }
+
+      span.time {
+        font: 13px/20px Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      }
+
+      button {
+        padding:5px;
+      }
+
+      #geolocation-note {
+        background-color:#fbc5ad;
+        margin-bottom:3px;
+        padding:3px;
+        text-align:center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='result'>the closest bus is <span id='result-bus'>...</span></div>
+    <p>This is a little hack that uses voronoi polygons and rasterization
+    to do nearest-neighbor searches <em>really</em> quickly.</p>
+    <p>It uses <a href='http://mbtiles.org'>MBTiles</a> for storage,
+    <a href='http://tilemill.com/'>TileMill</a> for generation,
+    <a href='http://mapbox.github.com/wax'>Wax</a> for interaction,
+    a bit of <a href='http://mbostock.github.com/d3'>d3</a> for brain-hurting
+    math, and magic pixie dust.</p>
+    <script>
+      var layerjson = 'http://c.tiles.mapbox.com/tmcw/1.0.0/tmcw.denver_bus_voronoi/layer.json'
+      var startTime = null;
+
+      window.onload = function() {
+        var r = document.getElementById('result-bus');
+
+        function gridQuery(l) {
+          utfgridquery(layerjson, {
+            lat: l.lat,
+            lon: l.lon
+            }, function(f) {
+            r.innerHTML = f.STOPNAME +
+            ' <span class="verb">going</span> ' + f.DIR +
+            ' <span class="verb">on routes</span> ' + f.ROUTES;
+            });
+        }
+        navigator.geolocation.getCurrentPosition(function(res) {
+          gridQuery({
+            lat: res.coords.latitude,
+            lon: res.coords.longitude
+          });
+        });
+      };
+    </script>
+  </body>
+</html>
