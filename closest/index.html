@@ -78,17 +78,31 @@
         padding:3px;
         text-align:center;
       }
+
+      div#warning {
+        color:#e9f7e9;
+        background-color:#222;
+        padding:2px 5px;
+      }
     </style>
   </head>
   <body>
+    <div id='warning'>this only works in Denver Colorado</div>
     <div id='result'>the closest bus is <span id='result-bus'>...</span></div>
-    <p>This is a little hack that uses voronoi polygons and rasterization
-    to do nearest-neighbor searches <em>really</em> quickly.</p>
+    <p>This is a little hack that uses <a href='http://en.wikipedia.org/wiki/Voronoi_diagram'>voronoi polygons</a>
+    and rasterization to do nearest-neighbor searches <em>really</em> quickly.</p>
     <p>It uses <a href='http://mbtiles.org'>MBTiles</a> for storage,
     <a href='http://tilemill.com/'>TileMill</a> for generation,
     <a href='http://mapbox.github.com/wax'>Wax</a> for interaction,
     a bit of <a href='http://mbostock.github.com/d3'>d3</a> for brain-hurting
     math, and magic pixie dust.</p>
+    <p>You can read about <a href='http://macwright.org/2011/08/10/fast-hacky-queries-with-utfgrid.html'>the first level</a>
+    of this hack, that did polygon operations. This time it's changing a different
+    problem into polygon operations.</p>
+    <p><a href='http://macwright.org/'>Tom MacWright</a> made it for kicks
+    with <a href='http://mapbox.com'>MapBox</a> tools
+    and makes no guarantees about his hacky bus locator.</p>
+    <a href='https://github.com/tmcw/demo/tree/gh-pages/closest'>[source code on GitHub]</a>
     <script>
       var layerjson = 'http://c.tiles.mapbox.com/tmcw/1.0.0/tmcw.denver_bus_voronoi/layer.json'
       var startTime = null;
@@ -113,6 +127,19 @@
           });
         });
       };
+    </script>
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4e36eb1ef5a1f53d6f000001');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
     </script>
   </body>
 </html>
