@@ -1,0 +1,13 @@
+destination: ./_site
+auto:        true
+source:      .
+lsi:         false
+server_port: 4000
+pygments:    true
+markdown:    rdiscount
+exclude:     .git
+permalink:   /:title.html
+url:         http://macwright.org/demo/maprosetta
+baseurl:     /maprosetta
+rdiscount:
+  extensions: [smart]
