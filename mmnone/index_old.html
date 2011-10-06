@@ -16,8 +16,8 @@
       // without a size, it will expand to fit the parent:
       var map = new com.modestmaps.Map(parent, provider);
       map.setZoom(4);
-      toggle.onclick = function() {
-        map_div.style.display = 'block';
+      document.getElementById('toggle').onclick = function() {
+        document.getElementById('map_div').style.display = 'block';
         map.setSize(map.parent.offsetWidth, map.parent.offsetHeight);
         return false;
       };
