@@ -33,11 +33,26 @@
       src='js/site.js'
       type='text/javascript'></script>
   </head>
-  <body>
+  <body id='mass'>
     <div class='container'>
       <div class='drawer'></div>
       <div id='map'></div>
-      <div id='header'><h1>Massachusetts Redistricting</h1></div>
-  </script>
+      <div id='header'><h1>Massachusetts Redistricting</h1>
+        <p>A quick demo of generating a <a href='http://en.wikipedia.org/wiki/Choropleth'>choropleth</a>
+        map with <a href='http://mapbox.com/'>MapBox</a>.</p>
+      </div>
+  <script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4e36eb1ef5a1f53d6f000001');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
   </body>
 </html>

@@ -7,7 +7,8 @@ $(window).load(function() {
        new mm.Location(
          41.9911,
          -71.73935
-      ), 9);
-      wax.mm.interaction(map, tj);
+      ), 8);
+      wax.mm.interaction(map, tj, { clickAction: [] });
+      wax.mm.zoomer(map).appendTo($('#header')[0]);
     });
 });

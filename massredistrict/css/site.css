@@ -17,8 +17,47 @@ body {
   height:48px;
 }
 
-h1 {
+#header p {
+  font: 12px/20px 'Helvetica';
+  color:#fff;
+  position:absolute;
+  left:300px;
+  top:15px;
+}
+
+#header p a {
+  color:#fff;
+}
+
+#header h1 {
   padding:10px 20px;
   font-size:20px;
   font: 'Georgia', serif;
+}
+
+#header a.zoomer {
+  font-size:40px;
+  line-height:40px;
+  width:40px;
+  height:40px;
+  background:#7aa9d2;
+}
+
+#header a.zoomout {
+  left:50px;
+}
+
+#header a.zoomer:hover {
+  background:#6b83a6;
+}
+
+body#mass div.wax-tooltip {
+  background:#6b83a6;
+  right:10px;
+  left:auto;
+  top:60px;
+}
+
+body#mass div.wax-tooltip a {
+  color:#fff;
 }
