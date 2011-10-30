@@ -1,0 +1,24 @@
+body {
+  background:#fff;
+}
+
+#map {
+  position:absolute;
+  top:50px;
+  left:0;
+  bottom:0;
+  right:0;
+}
+
+#header {
+  border-bottom:2px solid #10233F;
+  background:#6b83a6;
+  color:#fff;
+  height:48px;
+}
+
+h1 {
+  padding:10px 20px;
+  font-size:20px;
+  font: 'Georgia', serif;
+}
