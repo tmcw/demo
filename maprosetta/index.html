@@ -12,9 +12,9 @@
     <script
       src='js/site/ender.js'
       type='text/javascript'></script>
-    <script
+    <!-- <script
       src='js/site/site.js'
-      type='text/javascript'></script>
+      type='text/javascript'></script> -->
 
     <!-- modest maps -->
     <script
@@ -37,7 +37,6 @@
           <th>Modest Maps</th>
           <th>Leaflet</th>
           <th>OpenLayers</th>
-          <th>Google Maps</th>
         </tr>
       </thead>
       <tr>
@@ -68,8 +67,19 @@
 {% endhighlight %}
 </div>
         </td>
-        <td></td>
-        <td></td>
+        <td>
+          <h3>Map Initialization</h3>
+<div class='live'>
+{% highlight html %}
+<div id='openlayers-1' class='map'></div>
+<script type='text/javascript'>
+map = new OpenLayers.Map( 'map');
+map.addlayer(new OpenLayers.Layer.OSM("Simple OSM Map"));
+map.setCenter(new OpenLayers.LonLat(0, 0), 1);
+</script>
+{% endhighlight %}
+</div>
+        </td>
       </tr>
     </table>
   </body>
