@@ -1,0 +1,46 @@
+<html>
+<head>
+    <link href='tangle/TangleKit/TangleKit.css' type='text/css' rel='stylesheet' />
+    <script src='tangle/Tangle.js' type='text/javascript'></script>
+    <script src='tangle/TangleKit/mootools.js' type='text/javascript'></script>
+    <script src='tangle/TangleKit/sprintf.js' type='text/javascript'></script>
+    <script src='tangle/TangleKit/BVTouchable.js' type='text/javascript'></script>
+    <script src='tangle/TangleKit/TangleKit.js' type='text/javascript'></script>
+    <style type='text/css'>
+        body {
+            font: 18px/20px 'Helvetica Neue', sans-serif;
+            color:#333;
+            background:#f1f7f8;
+        }
+    </style>
+<script type='text/javascript'>
+    window.onload = function() {
+        // least common multiple of two numbers,
+        // via GCD, via Euclid's theorem
+
+        function gcd(a, b) {
+            return b === 0 ? a : gcd(b, a % b);
+        }
+
+        function lcm(a, b) {
+            return Math.abs(a * b) / gcd(a, b);
+        }
+
+        var tangle = new Tangle (document.getElementById("lcm_calc"), {
+            initialize: function () {
+                this.a = 5;
+                this.b = 6;
+                this.c = 30;
+            },
+            update: function () {
+                this.c = lcm(this.a, this.b);
+            }
+        });
+    }
+</script>
+</head>
+<body>
+  <p id="lcm_calc">
+  The least common multiple of <span class="TKAdjustableNumber" data-var="a"></span> and
+    <span class="TKAdjustableNumber" data-var="b"></span>
+  is <b data-var="c"></b>.</p>
