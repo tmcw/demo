@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <title>stream</title>
+    <script type='text/javascript' src='js/d3.js'></script>
+    <script type='text/javascript' src='js/d3.csv.js'></script>
+    <script type='text/javascript' src='js/d3.time.js'></script>
+    <script type='text/javascript' src='js/d3.layout.js'></script>
+    <style type='text/css'>
+    body {
+      font:12px/20px 'Helvetica Neue', sans-serif;
+    }
+
+    h1 {
+      color:#3b5998;
+      font:20px/20px normal 'Helvetica Neue', sans-serif;
+    }
+
+    a {
+      color:#3b5998;
+    }
+    p {
+      font:12px/20px 'Helvetica Neue', sans-serif;
+    }
+    .year-tick {
+      fill:#aaa;
+    }
+    .year-text {
+      fill:#333;
+      text-anchor:middle;
+    }
+    rect.people-tick {
+      text-anchor:right;
+      fill:#DCE2DC;
+    }
+    text.people-tick {
+      fill:#333;
+    }
+    .college {
+      fill: #F1FFF1;
+    }
+    .bday-tick {
+      fill:#FFF3A5;
+    }
+    .post {
+      fill:#111F36;
+    }
+
+    .college-label {
+      fill:#83B983;
+      font:18px/20px 'Helvetica Neue', sans-serif;
+    }
+
+    .over {
+      fill:#000;
+    }
+    .nonover {
+      fill:#eee;
+    }
+
+
+    #tool {
+      position:fixed;
+      padding:10px;
+      top:0;
+      right:0;
+      font-size:24px;
+    }
+
+
+    #how {
+      position:fixed;
+      padding:10px;
+      bottom:0;
+      right:0;
+    }
+
+    </style>
+  </head>
+  <body>
+    <h1>My Facebook Wall, from May 5, 2005 to today.</h1>
+    <p>Yellow lines are
+    my birthday, March 24th. The green area is time enrolled
+    at <a href='http://wm.edu'>W&M</a>.</p>
+    <div id='how'>
+      <p>Written with <a href='http://mbostock.github.com/d3'>d3</a>
+      and Facebook's export</p>
+    </div>
+    <div id='tool'></div>
+    <div id='chart'></div>
+<script type='text/javascript'>
+  var w = 3000, h = 550;
+  var topmargin = 30;
+  var fh = h - topmargin;
+  d3.csv('stream.csv', function(csv) {
+
+  ps = d3.scale.linear().domain([
+    d3.min(csv, function(d) { return +d.person; }),
+    d3.max(csv, function(d) { return +d.person; })]);
+
+  var bday = function() {
+    var b = [];
+    for (var i = 2004; i < 2013; i++) {
+    b.push(new Date("March 24, " + i));
+    }
+    return b;
+  }();
+
+  var ts = d3.time.scale().domain([
+    d3.min(csv, function(d) { return new Date(d.date); }),
+    d3.max(csv, function(d) { return new Date(d.date); })]);
+
+   var chart = d3.select('#chart').append("svg:svg")
+        .attr('width', w + 10)
+        .attr('class', 'Blues')
+        .attr('height', h + 40);
+
+     var cstart = ~~(w * ts(new Date('August 1, 2005')));
+     var cend = ~~(w * ts(new Date('May 1, 2009')));
+      chart.append('svg:rect')
+            .attr('x', cstart)
+            .attr('y', topmargin)
+            .attr('width', cend - cstart)
+            .attr('class', 'college')
+            .attr('height', fh);
+
+      chart.append('svg:text')
+          .text('college')
+          .attr('x', cstart + 20)
+          .attr('y', h - 20)
+          .attr('class', 'college-label');
+
+     chart.selectAll('rect.year-tick')
+            .data(ts.ticks())
+            .enter().append('svg:rect')
+            .attr('x', function(d) { return ~~(w * ts(d)); })
+            .attr('class', 'year-tick')
+            .attr('y', topmargin)
+            .attr('width', 1)
+            .attr('height', fh);
+
+
+      chart.selectAll('rect.people-tick')
+            .data(ps.ticks(10))
+            .enter().append('svg:rect')
+            .attr('y', function(d) { return topmargin + ~~(fh * ps(d)); })
+            .attr('class', 'people-tick')
+            .attr('x', 0)
+            .attr('width', w)
+            .attr('height', 1);
+
+      chart.selectAll('text.people-tick')
+            .data(ps.ticks(10))
+            .enter().append('svg:text')
+            .attr('y', function(d) { return 20 + topmargin + ~~(fh * ps(d)); })
+            .attr('class', 'people-tick')
+            .attr('x', 0)
+            .text(String);
+
+     var yr = d3.time.format('%Y');
+     var nice = d3.time.format('%m/%d/%Y');
+     chart.selectAll('text.year-text')
+            .data(ts.ticks())
+            .enter().append('svg:text')
+            .attr('x', function(d) { return ~~(w * ts(d)); })
+            .attr('class', 'year-text')
+            .attr('y', 20)
+            .text(yr);
+
+      chart.selectAll('rect.bday-tick')
+            .data(bday)
+            .enter().append('svg:rect')
+            .attr('x', function(d) { return ~~(w * ts(d)); })
+            .attr('class', 'bday-tick')
+            .attr('y', topmargin)
+            .attr('width', 2)
+            .attr('height', fh);
+
+     chart.selectAll('circle')
+            .data(csv)
+          .enter().append('svg:circle')
+            .attr('class', 'post')
+            .attr('r', 3)
+            .attr('cy', function(d, i) { return topmargin + ~~(fh * ps(d.person)) + 2; })
+            .attr('cx', function(d) {
+                return ~~(w * ts(new Date(d.date))) + 2;
+                })
+            .on('mouseover', function(d) {
+                d3.select(this).attr('r', 6);
+                d3.selectAll('circle.post').attr('class', function(e) {
+                  return (e.person == d.person) ? 'over': 'nonover';
+                  });
+                d3.select('#tool').text(nice(new Date(d.date)));
+            })
+            .on('mouseout', function(d) {
+                d3.selectAll('circle')
+                  .attr('class', 'post')
+                  .attr('r', 3);
+                d3.select('#tool').text('');
+            });
+  });
+</script>
+</body>
