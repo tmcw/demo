@@ -91,7 +91,7 @@
   var w = 3000, h = 550;
   var topmargin = 30;
   var fh = h - topmargin;
-  d3.csv('stream.csv', function(csv) {
+  d3.csv('stream_names.csv', function(csv) {
 
   ps = d3.scale.linear().domain([
     d3.min(csv, function(d) { return +d.person; }),
@@ -189,7 +189,7 @@
                 d3.selectAll('circle.post').attr('class', function(e) {
                   return (e.person == d.person) ? 'over': 'nonover';
                   });
-                d3.select('#tool').text(nice(new Date(d.date)));
+                d3.select('#tool').text(nice(new Date(d.date)) + ': ' + d.name);
             })
             .on('mouseout', function(d) {
                 d3.selectAll('circle')
@@ -198,5 +198,18 @@
                 d3.select('#tool').text('');
             });
   });
+</script>
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4e36eb1ef5a1f53d6f000001');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
 </script>
 </body>
