@@ -20,12 +20,9 @@ window.onload = function() {
 
   function rectProject(ll) {
     // translate
-    // var lat = ll[0] - 50;
-    // -129
-    return [
-        A * ll[0] * D2R,
-        A * Math.log(Math.tan((Math.PI*0.25) + (0.5 * ll[1] * D2R)))
-    ];
+    var lat = 20 * (ll[0] + 100); //  + 129;
+    var lon = 20 * (ll[1] - 37); // - 120;
+    return [lat, lon];
   }
 
   /*
@@ -52,6 +49,7 @@ window.onload = function() {
     canvas.width = w;
     ctx.lineWidth = 1;
     gj.features.forEach(function(f) {
+      console.log(f.geometry.proj);
       ctx.lineTo(
         (me + f.geometry.proj[0]) * mpi + (xrotation * (f.properties.delta / 100000000)),
         (me + f.geometry.proj[1]) * mpi + (yrotation * (f.properties.delta / 100000000))
@@ -61,6 +59,7 @@ window.onload = function() {
 
     ctx.lineWidth = 0.5;
 
+    /*
     markers.forEach(function(f) {
       ctx.closePath();
       ctx.beginPath();
@@ -74,6 +73,7 @@ window.onload = function() {
       );
       ctx.stroke();
     });
+    */
   }
 
   var starty = 0;

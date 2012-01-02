@@ -1,0 +1,46 @@
+body {
+  padding:0;
+  margin:0;
+  font-family: 'Helvetica Neue';
+  font-size:11px;
+}
+
+text {
+  fill:#444;
+}
+
+#container {
+  margin:10px;
+}
+
+rect.bg {
+  fill:#edf5f8;
+}
+
+rect.pt {
+  fill:#f2443c;
+}
+
+rect.marker {
+  fill:#f39e99;
+}
+
+rect.marker-bottom {
+  fill:#c8dbf0;
+}
+
+line.marker {
+  stroke:#5482b7;
+  stroke-width:1;
+}
+
+line.timeline, line.lat {
+  stroke:#D2DEE2;
+  stroke-width:1;
+  stroke-dasharray: 5 2;
+}
+
+path.ptpath {
+  stroke:#AED1DD;
+  fill:none;
+}
