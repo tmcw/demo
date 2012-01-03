@@ -9,29 +9,41 @@ text {
   fill:#444;
 }
 
+text.timeline {
+  text-anchor:end;
+}
+
 #container {
-  margin:10px;
+  position:absolute;
+  top:0px;
+  left:0px;
 }
 
 rect.bg {
-  fill:#edf5f8;
+  fill:#e2ecee;
 }
 
 rect.pt {
   fill:#f2443c;
 }
 
+rect.play {
+  fill:#b3194f;
+  stroke-width:1;
+  stroke:#fff;
+}
+
 rect.marker {
   fill:#f39e99;
 }
 
-rect.marker-bottom {
+rect.marker-bottom, rect.marker-top {
   fill:#c8dbf0;
 }
 
 line.marker {
   stroke:#5482b7;
-  stroke-width:1;
+  stroke-width:0.5;
 }
 
 line.timeline, line.lat {
@@ -43,4 +55,58 @@ line.timeline, line.lat {
 path.ptpath {
   stroke:#AED1DD;
   fill:none;
+}
+
+path.strongptpath, line.playerline {
+  stroke:#EE0B0B;
+  stroke-width:1.5;
+  fill:none;
+}
+
+text.legend {
+  text-transform:uppercase;
+  font-weight:bold;
+  font-size:14px;
+}
+
+#map {
+  width:200px;
+  height:559px;
+  border:1px solid #D2DEE2;
+  position:absolute;
+  left:440px;
+  top:20px;
+}
+
+a {
+  color:#EE0B0B;
+}
+
+a:hover {
+  color:#000;
+}
+
+#powered {
+  position:absolute;
+  left: 460px;
+  top:585px;
+}
+
+.me, .me-shadow {
+  position:absolute;
+  left:90px;
+  top:290px;
+  height:20px;
+  width:20px;
+  border-radius:10px;
+  background:#831B11;
+  border:1px solid #fff;
+}
+
+.me-shadow {
+  background:#836563;
+  border:0;
+  top:298px;
+  left:88px;
+  opacity:0.2;
 }
