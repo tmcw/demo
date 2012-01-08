@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fairmont Chore Wheel</title>
+    <meta name="viewport" content = "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />  
+    <script type='text/javascript'>
+      window.onload = function() {
+        var container = document.getElementById('container');
+        var housemates = 'Sean Lucy Tom Tommy Stephen Meghan Brian'.split(' ');
+        var chores = 'Trash Trash Dishes Dishes Off Off Off'.split(' ');
+        var d = (new Date()).getDay();
+        housemates.forEach(function(h, i) {
+            var row = container.appendChild(document.createElement('div'));
+            row.className = 'row';
+            var housemate = row.appendChild(document.createElement('span'));
+            housemate.className = 'housemate';
+            housemate.innerHTML = h;
+            var does = row.appendChild(document.createElement('span'));
+            does.className = 'does';
+            does.innerHTML = (chores[i % chores.length] == 'Off') ? ' has ' : ' does ';
+            var chore = row.appendChild(document.createElement('span'));
+            chore.className = 'chore';
+            chore.innerHTML = chores[i % chores.length];
+        });
+      };
+    </script>
+    <style type='text/css'>
+      body {
+        font:bold 30px/40px 'Helvetica Neue';
+        color:#222;
+        margin:0;
+        padding:0;
+      }
+      h1 {
+        font:bold 30px/40px 'Helvetica Neue';
+        text-shadow: 0px 1px 0px #000;
+        margin:0 auto;
+        width:300px;
+        background:url('map.png') #222;
+        background-position:fixed;
+        color:#eee;
+        border-bottom:1px solid #000;
+        padding:10px;
+      }
+      #container {
+        margin:0 auto;
+        width:320px;
+      }
+      .row {
+        padding:10px;
+        border-bottom:1px solid #aaa;
+        border-top:1px solid #eee;
+      }
+      .does {
+        color:#999;
+      }
+      .chore {
+        color:#a22;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>The Fairmont Chore Wheel</h1>
+    <div id='container'></div>
+  </body>
+</html>
