@@ -2,13 +2,14 @@
 <html>
   <head>
     <title>Fairmont Chore Wheel</title>
-    <meta name="viewport" content = "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />  
+    <meta name="viewport" content = "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <script type='text/javascript'>
       window.onload = function() {
         var container = document.getElementById('container');
-        var housemates = 'Sean Lucy Tom Tommy Stephen Meghan Brian'.split(' ');
-        var chores = 'Trash Trash Dishes Dishes Off Off Off'.split(' ');
+        var housemates = 'Brian Tom Tommy Sean Stephen Meghan Lucy'.split(' ');
+        var chores = 'Trash Dishes Dishes Off Off Off Trash'.split(' ');
         var d = (new Date()).getDay();
+
         housemates.forEach(function(h, i) {
             var row = container.appendChild(document.createElement('div'));
             row.className = 'row';
@@ -17,11 +18,16 @@
             housemate.innerHTML = h;
             var does = row.appendChild(document.createElement('span'));
             does.className = 'does';
-            does.innerHTML = (chores[i % chores.length] == 'Off') ? ' has ' : ' does ';
+            does.innerHTML = (chores[(d + i) % chores.length] == 'Off') ? ' has ' : ' does ';
             var chore = row.appendChild(document.createElement('span'));
             chore.className = 'chore';
-            chore.innerHTML = chores[i % chores.length];
+            chore.innerHTML = chores[(d + i) % chores.length];
         });
+
+        var wheel = document.getElementById('wheel');
+        wheel.onclick = function(e) {
+          container.style.fontFamily = 'Georgia';
+        };
       };
     </script>
     <style type='text/css'>
@@ -60,7 +66,7 @@
     </style>
   </head>
   <body>
-    <h1>The Fairmont Chore Wheel</h1>
+    <h1>The Fairmont Chore <span id='wheel'>Wheel</span></h1>
     <div id='container'></div>
   </body>
 </html>
