@@ -7,7 +7,7 @@
       window.onload = function() {
         var container = document.getElementById('container');
         var housemates = 'Brian Tom Tommy Sean Stephen Meghan Lucy'.split(' ');
-        var chores = 'Trash Dishes Dishes Off Off Off Trash'.split(' ');
+        var chores = 'Trash Off Dishes Off Dishes Off Trash'.split(' ');
         var d = (new Date()).getDay();
 
         housemates.forEach(function(h, i) {
@@ -22,6 +22,7 @@
             var chore = row.appendChild(document.createElement('span'));
             chore.className = 'chore';
             chore.innerHTML = chores[(d + i) % chores.length];
+
         });
 
         var wheel = document.getElementById('wheel');
@@ -43,7 +44,7 @@
         margin:0 auto;
         width:300px;
         background:url('map.png') #222;
-        background-position:fixed;
+        background-position:-60px -70px;
         color:#eee;
         border-bottom:1px solid #000;
         padding:10px;
@@ -58,15 +59,20 @@
         border-top:1px solid #eee;
       }
       .does {
-        color:#999;
+        color:#a22;
+        font-weight:normal;
       }
       .chore {
         color:#a22;
+      }
+      .me {
+        font:bold 30px/40px 'Helvetica Neue';
       }
     </style>
   </head>
   <body>
     <h1>The Fairmont Chore <span id='wheel'>Wheel</span></h1>
-    <div id='container'></div>
+    <div id='container'>
+    </div>
   </body>
 </html>
