@@ -3,12 +3,13 @@
   <head>
     <title>Fairmont Chore Wheel</title>
     <meta name="viewport" content = "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <script src='chrono.js'></script>
     <script type='text/javascript'>
       window.onload = function() {
         var container = document.getElementById('container');
         var housemates = 'Brian Tom Tommy Sean Stephen Meghan Lucy'.split(' ');
         var chores = 'Trash Off Dishes Off Dishes Off Trash'.split(' ');
-        var d = (new Date()).getDay();
+        var d = (new Date()).getUTCISOWeek();
 
         housemates.forEach(function(h, i) {
             var row = container.appendChild(document.createElement('div'));
@@ -22,7 +23,6 @@
             var chore = row.appendChild(document.createElement('span'));
             chore.className = 'chore';
             chore.innerHTML = chores[(d + i) % chores.length];
-
         });
 
         var wheel = document.getElementById('wheel');
@@ -73,6 +73,9 @@
   <body>
     <h1>The Fairmont Chore <span id='wheel'>Wheel</span></h1>
     <div id='container'>
+    </div>
+    <div style='text-align:center;'>
+      <img alt='week of days' src='skull.png' />
     </div>
   </body>
 </html>
