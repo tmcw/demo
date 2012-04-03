@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ventricle</title>
+    <script src='jquery.js' type='text/javascript'></script>
+    <script src='underscore.js' type='text/javascript'></script>
+    <script type='text/javascript'>
+      $(function() {
+      var start = +new Date();
+      var w = 640,
+          h = 640,
+          bpm = 60,
+          minx, maxx, miny, maxy;
+
+      function bpt(bpm) {
+        return (60 / bpm) * 2;
+      }
+
+      var c = $('#map')[0];
+      var ctx = $('#map')[0].getContext('2d');
+
+      ctx.fillStyle = '#444';
+      ctx.fillRect(0, 0, 640, 480);
+
+      ctx.fillStyle = '#000';
+
+      // 1000 seconds is one sec
+      function sf(f, t) {
+        return (Math.sin((Math.PI * bpt(f)) * (t / 1000)) + 1) / 2;
+      }
+
+      function draw() {
+          c.width = 640;
+          var t = (+new Date()) - start;
+          ctx.fillRect(0, 0, sf(bpm, t) * 640, 640);
+      }
+
+      window.setInterval(draw, 1);
+
+      });
+    </script>
+    <style type='text/css'>
+      body {
+        background:#fff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas dropzone="copy" id='map' width=640 height=640></canvas>
+  </body>
+</html>
