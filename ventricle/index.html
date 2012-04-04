@@ -31,7 +31,6 @@
       if (typeof FileReader == 'undefined' ||
         !isCanvasSupported()) {
         $('#browser').addClass('no').text('yours doesn\'t make the cut :/');
-        return;
       } else {
         $('#browser').addClass('yes').text('you have one!');
       }
@@ -186,8 +185,22 @@
       <a href='#' id='demo'>(or demo)</a>
       <p>this requires a sweet web browser and <span id='browser'></span></p>
       <p>a little hack by <a href='http://macwright.org/'>tom macwright</a>.</p>
+      <p><a href='http://macwright.org/running'>my old running map</a> is also cool.</p>
     </div>
     <div id='undermap'></div>
     <canvas dropzone="copy" id='map' width=800 height=600></canvas>
+    <script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4e36eb1ef5a1f53d6f000001');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
   </body>
 </html>
