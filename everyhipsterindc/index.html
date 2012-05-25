@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>every hipster in dc</title>
+        <style>
+            body {
+                font:12px/20px 'Helvetica';
+                padding:0;
+                margin:0;
+            }
+            tr {
+                border-bottom:1px solid magenta;
+                vertical-align:top;
+            }
+            .r {
+                text-align:right;
+            }
+            .l {
+                text-align:left;
+            }
+            .hl, a {
+                color:magenta;
+            }
+            #t {
+                border-spacing:0;
+                border-collapse:collapse;
+                position:absolute;
+            }
+            p {
+                margin:0;
+                padding:10px;
+                color:#fff;
+                background:#000;
+                text-align:middle;
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href='http://everybarindc.com/'>Every Bar in DC</a> is a ridiculous 'DC'
+        'blog' about 'bars', but it's
+        also about complaining about hipsters. Without going into the moronic, overplayed
+        subject itself, here's just the blog distilled.</p>
+        <table id='t'>
+        </table>
+<script>
+var bs = [
+    {
+        text: 'Boundary Stone is the newest addition to the Bloomingdale neighborhood, which still has an unmet demand for hipster bars.',
+        bar: 'Boundary Stone',
+        n: 39,
+        url: 'http://everybarindc.com/2012/01/12/bar-39-boundary-stone/'
+    },
+    {
+        text: "While it's an absolute gem for the neighborhood (and any locals wanting to avoid the mustachioed hipster crowd at Big Bear), I can't recommend Rustik as a Saturday night destination spot for travelers.",
+        bar: 'Rustik Tavern',
+        n: 37,
+        url: 'http://everybarindc.com/2011/12/12/bar-37-rustik-tavern/'
+    },
+    {
+        text: "In fact, I see the Alice and Wonderland types to be more like the hipsters that, well, hangout at the Wonderland and the Looking Glass and spend their free time reading or going to ren-fairs not watching sports.",
+        bar: 'MadHatter',
+        n: 31,
+        url: 'http://everybarindc.com/2011/03/11/bar-31-madhatter/'
+    },
+    {
+        text: "Clientele: Metal-heads, punk-rockers, H-street hipsters, neighborhood locals, and one cat.",
+        bar: 'Red And The Black',
+        n: 25,
+        url: 'http://everybarindc.com/2010/10/04/bar-25-the-red-and-the-black/'
+    },
+    {
+        text: "Stop kidding yourself - you're a hipster who fancies himself a hep cat because he drinks PBR at one of DCs most-beloved dive bars.",
+        bar: 'The Raven Grill',
+        n: 15,
+        url: 'http://everybarindc.com/2010/06/21/bar-15-the-raven-grill/'
+    },
+    {
+        text: "clientele: ironic hipsters, scenesters and libertarians; local degenerates; Mount Pleasant townies.",
+        bar: 'The Raven Grill',
+        n: 15,
+        url: 'http://everybarindc.com/2010/06/21/bar-15-the-raven-grill/'
+    },
+    {
+        text: "On some weekends, bearded boys donning fedoras and women's jeans, along with their anorexic, bespectacled girlfriends descend upon the place like vultures, crowding the place so that getting a drink without getting sandwiched by hipster musk is nearly impossible, all of them competing in that age-old scenester pissing contest of who can get the most &#8220;indie-cred- or whatever conceptual bullshit they use for social currency.",
+        bar: 'The Raven Grill',
+        n: 15,
+        url: 'http://everybarindc.com/2010/06/21/bar-15-the-raven-grill/'
+    },
+    {
+        text: "Used to be an okay local bar but now its full of fucking hipsters.",
+        bar: 'Wonderland',
+        n: 9,
+        url: 'http://everybarindc.com/2010/05/18/bar-9-wonderland-ballroom/'
+    },
+    {
+        text: "Suburbanites who dress like hipsters but who think Wonderland is edgy.",
+        bar: 'Wonderland',
+        n: 9,
+        url: 'http://everybarindc.com/2010/05/18/bar-9-wonderland-ballroom/'
+    },
+    {
+        text: "As many problems as I have with hipsters (although what does that even mean anymore?), they abandoned that place years ago.",
+        bar: 'Wonderland',
+        n: 9,
+        url: 'http://everybarindc.com/2010/05/18/bar-9-wonderland-ballroom/'
+    },
+    {
+        text: "Clientele: hipsters and alcoholic regulars who you've met many times but they still don't remember your name",
+        bar: 'Red Derby',
+        n: 7,
+        url: 'http://everybarindc.com/2010/05/13/bar-7-red-derby/'
+    },
+    {
+        text: "(it is a biker-bar after all - granted, they're fixed-gear hipster-bikers)",
+        bar: 'Red Derby',
+        n: 7,
+        url: 'http://everybarindc.com/2010/05/13/bar-7-red-derby/'
+    }
+];
+
+var t = document.getElementById('t');
+
+bs.sort(function(a, b) { return a.n - b.n; });
+
+for (var i = 0; i < bs.length; i++) {
+    var b = bs[i];
+    var tr = t.appendChild(document.createElement('tr'));
+    var n = tr.appendChild(document.createElement('td'));
+    var na = n.appendChild(document.createElement('a'));
+    na.innerHTML = '#' + b.n + ' ' + b.bar;
+    na.href = b.url;
+
+    var before = tr.appendChild(document.createElement('td'));
+    before.innerHTML = b.text.split('hipster')[0];
+    before.className = 'r';
+    var hipster = tr.appendChild(document.createElement('td'));
+    hipster.className = 'hl';
+    hipster.innerHTML = 'hipster';
+    var after = tr.appendChild(document.createElement('td'));
+    after.innerHTML = b.text.split('hipster')[1];
+    after.className = 'l';
+}
+</script>
+</html>
