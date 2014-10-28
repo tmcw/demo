@@ -1,4 +1,4 @@
-var w = 440, h = 600, tgutter = 20, gutter = 20, lgutter = 10, mm = com.modestmaps;
+var w = 440, h = 600, tgutter = 20, gutter = 20, lgutter = 10;
 
 window.onload = function() {
   var req = new window.XMLHttpRequest();
@@ -36,16 +36,9 @@ window.onload = function() {
       [-105, 'Denver'],
       [-122.3, 'SF']];
 
-   var tj = {"center":[0,0,4],"scheme":"xyz","bounds":[-180,-85.05,180,85.05],"minzoom":0,"maxzoom":8,"tiles":[
-       "http://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png",
-       "http://b.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png",
-       "http://c.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png",
-       "http://d.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png"
-   ]};
-
-   var map = new mm.Map('map', new wax.mm.connector(tj));
-
-   map.setZoom(8);
+   L.mapbox.accessToken = 'pk.eyJ1IjoidG1jdyIsImEiOiJIZmRUQjRBIn0.lRARalfaGHnPdRcc-7QZYQ';
+    var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+    .setView([40, -74.50], 9);
 
    chart.append('svg:rect')
       .attr('class', 'bg')
@@ -192,19 +185,16 @@ window.onload = function() {
 
         var idx = d3.bisect(times, t.invert(mousey));
         var feat = pts.features[idx];
-        easey.slow(map, {
-           location: new mm.Location(
-               feat.geometry.coordinates[1],
-               feat.geometry.coordinates[0]
-            ),
-            zoom: 8
-        });
+        map.setView(
+            [feat.geometry.coordinates[1],
+            feat.geometry.coordinates[0]], 8
+        );
      });
 
-     map.setCenter(new mm.Location(
+     map.setView([
         pts.features[0].geometry.coordinates[1],
-        pts.features[0].geometry.coordinates[0]
-     ));
+        pts.features[0].geometry.coordinates[0]], 8
+     );
 
      d3.select('#map')
         .append('div')
